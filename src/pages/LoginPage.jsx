@@ -1,9 +1,18 @@
-import { Link } from "react-router";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { Loading } from "../components/Loading";
+import { useForm } from "../hooks/useForm";
 
 export const LoginPage = () => {
+  const navigate = useNavigate();
   // TODO: Integrar lógica de autenticación aquí
   // TODO: Implementar useForm para el manejo del formulario
   // TODO: Implementar función handleSubmit
+
+   const { formState, handleChange, handleReset } = useForm({
+    username: "",
+    password: "",
+  });
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-8">
