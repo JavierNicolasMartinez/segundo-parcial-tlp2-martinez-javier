@@ -1,6 +1,11 @@
-import { Link } from "react-router";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { Loading } from "../components/Loading";
+import { useForm } from "../hooks/useForm";
 
 export const RegisterPage = () => {
+  const navigate = useNavigate();
+  
   // TODO: Integrar lógica de registro aquí
   // TODO: Implementar useForm para el manejo del formulario
   // TODO: Implementar función handleSubmit
