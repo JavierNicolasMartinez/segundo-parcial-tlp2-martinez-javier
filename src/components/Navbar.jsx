@@ -29,7 +29,7 @@ export const Navbar = () => {
   // TODO: Después del logout exitoso, redireccionar a /login
   // TODO: Manejar errores apropiadamente
 
-  const getProfile = async () => {
+  const Profile = async () => {
     try {
       const res = await fetch("http://localhost:3000/api/profile", {
         credentials: "include",
@@ -45,7 +45,7 @@ export const Navbar = () => {
   };
 
   useEffect(() => {
-    getProfile();
+    Profile();
   }, []);
 
   // TODO: Reemplazar con el nombre real del usuario obtenido de /api/profile
