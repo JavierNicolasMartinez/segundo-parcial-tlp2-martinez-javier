@@ -39,11 +39,12 @@ export const RegisterPage = () => {
         credentials: "include",
         body: JSON.stringify(payload),
       });
-      const data = await res.json();
+
       if (res.ok) {
         console.log("Usuario Registrado");
+        navigate("/login");
       } else {
-        alert(data.message || "Error al registrarse");
+        alert("Credenciales incorrectas");
         handleReset();
       }
     } catch (error) {
@@ -52,12 +53,11 @@ export const RegisterPage = () => {
       handleReset();
     } finally {
       setLoading(false);
-      navigate("/login");
     }
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 py-8">
-      {loading && <Loading />}
+      {/* {loading && <Loading />} */}
       <div className="max-w-lg w-full bg-white rounded-lg shadow-xl p-8">
         <h2 className="text-3xl font-bold text-center mb-6 text-gray-800">
           Crear Cuenta
@@ -70,7 +70,11 @@ export const RegisterPage = () => {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={(event) => {
+            handleSubmit(event);
+          }}
+        >
           <div className="mb-4">
             <label
               htmlFor="username"

@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router";
-import { Loading } from "../components/Loading";
 import { useForm } from "../hooks/useForm";
 
-export const LoginPage = ({ onLogin }) => {
+export const LoginPage = () => {
   const navigate = useNavigate();
   // TODO: Integrar lógica de autenticación aquí
   // TODO: Implementar useForm para el manejo del formulario
@@ -16,8 +15,9 @@ export const LoginPage = ({ onLogin }) => {
 
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
 
     try {
       const res = await fetch("http://localhost:3000/api/login", {
@@ -27,13 +27,11 @@ export const LoginPage = ({ onLogin }) => {
         body: JSON.stringify(formState),
       });
 
-      const data = await res.json();
-
       if (res.ok) {
-        onLogin();
         console.log(res.ok);
+        navigate("/home");
       } else {
-        alert(data.message || "Credenciales invalidas");
+        alert("Credenciales invalidas");
         handleReset();
       }
     } catch (error) {
@@ -42,7 +40,6 @@ export const LoginPage = ({ onLogin }) => {
       handleReset();
     } finally {
       setLoading(false);
-      navigate("/home");
     }
   };
   return (
@@ -59,8 +56,7 @@ export const LoginPage = ({ onLogin }) => {
             Credenciales incorrectas. Intenta nuevamente.
           </p>
         </div>
-{loading && <Loading />}
-        <form onSubmit={handleLogin}>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
               htmlFor="username"
